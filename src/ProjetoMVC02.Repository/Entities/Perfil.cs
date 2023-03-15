@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetoMVC02.Repository.Entities
 {
@@ -18,7 +15,7 @@ namespace ProjetoMVC02.Repository.Entities
         #region Navigations
 
         public List<Usuario> Usuarios { get; set; }
-        public List<PerfilFuncionalidade> PerfislFuncionalidades { get; set; }
+        public List<PerfilFuncionalidade> PerfisFuncionalidades { get; set; }
 
         #endregion
     }
