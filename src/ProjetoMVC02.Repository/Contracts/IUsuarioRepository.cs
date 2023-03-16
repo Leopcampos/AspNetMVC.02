@@ -8,8 +8,14 @@ namespace ProjetoMVC02.Repository.Contracts
         #region Métodos abstratos
 
         void Create(Usuario usuario);
+        void Update(Usuario usuario);
+        void Delete(Usuario usuario);
 
         List<Usuario> GetAll();
+
+        List<Usuario> GetAll(string nome);
+
+        Usuario Get(string email);
 
         Usuario Get(string email, string senha);
 

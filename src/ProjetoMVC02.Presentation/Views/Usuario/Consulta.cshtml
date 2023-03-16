@@ -1,4 +1,4 @@
-﻿
+﻿@model ProjetoMVC02.Presentation.Models.UsuarioConsultaModel
 @{
     ViewData["Title"] = "Consulta de Usuários";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,34 +7,67 @@
 <h5>@ViewData["Title"]</h5>
 <hr/>
 
-<table class="table table-bordered table-striped table-hover table-primary">
-    <thead>
-        <tr>
-            <th>Nome do Usuário</th>
-            <th>Email de Acesso</th>
-            <th>Data de Criação</th>
-            <th>Perfil</th>
-            <th>Operações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <aa href="/Usuario/Exclusao" class="btn btn-danger btn-sm">
-                    Excluir
-                </a>
+<div class="row">
+    <div class="col-md-4">
+            @using (Html.BeginForm())
+            {
+                <label>Nome do Usuário:</label> 
+                @Html.TextBoxFor(model => model.Nome,
+                new
+                {
+                    @class = "form-control",
+                    @placeholder = "Digite aqui"
+                })
+                <span class="text-danger"> 
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </span>
+                <br/>
+                <input type="submit" value="Realizar Pesquisa" class="btn btn-success"/>
+            }
+    </div>
+</div>
+
+@if (Model.Usuarios != null && Model.Usuarios.Count() > 0)
+{
+    <table class="table table-bordered table-striped table-hover table-light">
+        <thead>
+            <tr>
+                <th>Nome do Usuário</th>
+                <th>Email de Acesso</th>
+                <th>Data de Criação</th>
+                <th>Perfil</th>
+                <th width="160">Operações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Usuarios)
+            {
+                <tr>
+                    <td>@item.Nome</td>
+                    <td>@item.Email</td>
+                    <td>@item.DataCriacao.ToString("dd/MM/yyyy")</td>
+                    <td></td>
+                    <td>
+                        <a href="/Usuario/Edicao?id=@item.Id" class="btn btn-primary btn-sm mr-1">
+                            Alterar
+                        </a>
+                        <a href="/Usuario/Exclusao?id=@item.Id" onclick="return confirm ('Deseja excluir o usuário selecionado?');
+                        " class="btn btn-danger btn-sm">
+                            Excluir
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+            <td colspan="5"> Quantidade de usuários: @Model.Usuarios.Count()
             </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="5">
-                Quantidade de usuários: 0
-            </td>
-        </tr>
-    </tfoot>
-</table>
+            </tr>
+        </tfoot>
+    </table>
+}
+else
+{
+    <strong>Nenhum usuário foi encontrado.</strong>
+}

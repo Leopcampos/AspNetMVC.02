@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjetoMVC02.CrossCutting\ProjetoMVC02.CrossCutting.csproj" />
     <ProjectReference Include="..\ProjetoMVC02.Repository\ProjetoMVC02.Repository.csproj" />
   </ItemGroup>
 
