@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjetoMVC02.Presentation.Models
 {
@@ -19,5 +21,17 @@ namespace ProjetoMVC02.Presentation.Models
         [Compare("Senha", ErrorMessage = "Senhas não conferem.")]
         [Required(ErrorMessage = "Por favor, confirme a senha do usuário.")]
         public string SenhaConfirmacao { get; set; }
+
+        #region Seleção do perfil do usuário
+
+        //Campo para resgatar o ID do perfil selecionado no formulário
+        [Required(ErrorMessage = "Por favor, selecione o perfil do usuário.")]
+        public string PerfilID { get; set; }
+
+        //Campo para exibir todos os perfis cadastrados,
+        //para que o usuario selecione 1 opção.
+        public List<SelectListItem> ListagemPerfis { get; set; }
+
+        #endregion
     }
 }

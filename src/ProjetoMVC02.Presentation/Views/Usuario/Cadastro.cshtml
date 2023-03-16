@@ -62,6 +62,18 @@
                 </span>
                 <br />   
 
+        <label>Senha de Acesso:</label>
+            @Html.DropDownListFor(model => model.PerfilID,
+                Model.ListagemPerfis, "Escolha uma opção",
+                new
+                {
+                    @class = "form-control",
+                 })
+                <span class="text-danger">
+                    @Html.ValidationMessageFor(model => model.PerfilID)
+                </span>
+                <br /> 
+
                 <input type="submit" value="Realizar Cadastro" class="btn btn-success">
      }
     </div>

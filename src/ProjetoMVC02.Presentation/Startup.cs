@@ -33,6 +33,9 @@ namespace ProjetoMVC02.Presentation
             //configurando a classe/interface UsuarioRepository
             services.AddTransient<IUsuarioRepository>(map => new UsuarioRepository(connectionString));
 
+            //configurando a classe/interface PerfilRepository
+            services.AddTransient<IPerfilRepository>(map => new PerfilRepository(connectionString));
+
             #endregion
 
             #region Configuração para autenticação

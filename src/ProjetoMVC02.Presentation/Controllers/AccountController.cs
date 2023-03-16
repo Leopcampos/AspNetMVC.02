@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using ProjetoMVC02.CrossCutting.Cryptography;
 using ProjetoMVC02.Presentation.Models;
 using ProjetoMVC02.Repository.Contracts;
 using System;
@@ -22,8 +23,8 @@ namespace ProjetoMVC02.Presentation.Controllers
             {
                 try
                 {
-                    //buscando o usuario no banco de dados através do email e senha
-                    var usuario = usuarioRepository.Get(model.Email, model.Senha);
+                    //buscando o usuario no banco de dados através do email e senha, e usando a criptografia MD5.
+                    var usuario = usuarioRepository.Get(model.Email, MD5Cryptography.Encrypt(model.Senha));
 
                     //verificar se o usuário foi encontrado
                     if (usuario != null)
@@ -34,7 +35,7 @@ namespace ProjetoMVC02.Presentation.Controllers
                         var identity = new ClaimsIdentity(
                         new[] { new Claim(ClaimTypes.Name, usuario.Email) },
                         CookieAuthenticationDefaults.AuthenticationScheme);
-                        
+
                         //gravando a autorização em um arquivo de cookie..
                         var principal = new ClaimsPrincipal(identity);
                         HttpContext.SignInAsync
